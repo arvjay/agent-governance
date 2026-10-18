@@ -1,0 +1,28 @@
+name: hr_leave_balance_only
+version: "1.0.0"
+control_id: HR-DM-001
+agent: hr-leave-assistant
+mode: enforce   # enforce (block violations) | audit (record only)
+network_policies:
+  allow:
+    - name: leave_balance_read
+      host: hr.example
+      methods: [GET]
+      path: /v1/me/leave-balance
+  deny:
+    - name: payroll
+      host: hr.example
+      methods: ["*"]
+      path: /v1/payroll*
+    - name: medical_records
+      host: hr.example
+      methods: ["*"]
+      path: /v1/medical*
+tests:
+  positive:
+    - {method: GET, url: "https://hr.example/v1/me/leave-balance"}
+  negative:
+    - {method: GET, url: "https://hr.example/v1/payroll"}
+    - {method: GET, url: "https://hr.example/v1/medical/records"}
+    - {method: PUT, url: "https://hr.example/v1/me/leave-balance"}
+    - {method: GET, url: "https://other.example/v1/me/leave-balance"}

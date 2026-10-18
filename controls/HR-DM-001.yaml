@@ -1,0 +1,9 @@
+id: HR-DM-001
+title: HR leave assistant may only read the requesting employee's leave balance
+source_regulation: GDPR-5-1-c
+agent: hr-leave-assistant
+resources:
+  - hr-api
+actions:
+  - read leave balance
+coverage: full   # full | partial | none (runtime enforcement coverage)

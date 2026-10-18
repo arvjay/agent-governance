@@ -1,0 +1,3 @@
+pydantic>=2.7      # typed models for regulations, controls, policies, evidence
+PyYAML>=6.0        # load policy-as-code YAML files
+pytest>=8.0        # behavior tests (positive + negative)
